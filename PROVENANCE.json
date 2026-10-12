@@ -1,0 +1,66 @@
+{
+  "extension_version": "0.1",
+  "created_date": "2026-10-08",
+  "bowcar": {
+    "version": "1.3.4",
+    "dependency_source": "PyPI",
+    "verification_source_revision": "255d807123353071e99543de7b1fdfaf8e8cffbc"
+  },
+  "huskylens": {
+    "model": 1,
+    "library_version": "1.0.1",
+    "upstream": "https://github.com/HuskyLens/HUSKYLENSArduino",
+    "revision": "6051643d783190bf5118e61f42554db4b79568a2",
+    "unmodified_files": [
+      {
+        "path": "vendor/HUSKYLENS/HUSKYLENS.h",
+        "sha": "d2e0ba6f71dc7d1731f864d9681e502e9b9147de"
+      },
+      {
+        "path": "vendor/HUSKYLENS/HuskyLensProtocolCore.h",
+        "sha": "3b05b0645da38b307fd2b8fcc09145e354bdac1e"
+      },
+      {
+        "path": "vendor/HUSKYLENS/HuskyLensProtocolCore.c",
+        "sha": "965d35ae03e958aded8e7b26a117f3a1fbcdbd1d"
+      },
+      {
+        "path": "vendor/HUSKYLENS/library.properties",
+        "sha": "67191b9f9f4fab0a112f40e96667ac4ae4add3d6"
+      },
+      {
+        "path": "vendor/HUSKYLENS/HUSKYLENS.cpp",
+        "sha": "2c2e420bd6ed821624aa49faac28602d7eec6994"
+      }
+    ]
+  },
+  "verification": {
+    "python_unittest_methods": 9,
+    "python_passed": 7,
+    "python_host_methods_skipped_on_windows": 2,
+    "host_simulated_cases": 10,
+    "host_validation_compiler": "MSVC with temporary upstream portability shims",
+    "gcc_host_execution_on_this_windows": false,
+    "avr_compilation": true,
+    "avr_core": "arduino:avr@1.8.8",
+    "avr_compiled_sketches": [
+      "color_neopixel",
+      "connection_check",
+      "face_follow",
+      "follow_object",
+      "line_follow",
+      "tag_actions"
+    ],
+    "physical_hardware_test": false,
+    "github_actions_execution": false
+  },
+  "repository": {
+    "owner": "mkidkm",
+    "name": "bowcar_with_huskeylens",
+    "visibility": "public",
+    "url": "https://github.com/mkidkm/bowcar_with_huskeylens"
+  },
+  "updated_date": "2026-10-12",
+  "default_board": "arduino:avr:uno",
+  "default_port": "automatic_arduino_or_ch340"
+}

@@ -1,0 +1,31 @@
+HUSKYLENS manufacturer library
+
+Upstream: https://github.com/HuskyLens/HUSKYLENSArduino
+Pinned revision: 6051643d783190bf5118e61f42554db4b79568a2
+library.properties version: 1.0.1
+
+The following upstream files are provided as unmodified source under
+vendor/HUSKYLENS and inside HUSKYLENS_library.zip:
+  HUSKYLENS.h
+  HUSKYLENS.cpp
+  HuskyLensProtocolCore.h
+  HuskyLensProtocolCore.c
+  library.properties
+
+HUSKYLENS.h states copyright DFRobot (2016), credits Angelo and Robert,
+and identifies the GNU Lesser General Public License without a version number.
+COPYING.LGPL supplies the version 3 LGPL text including its incorporated GPL
+text, retrieved from the SPDX license-list-data repository. Original source
+notices are retained. The included source permits rebuilding the generated
+firmware with a replacement or modified HUSKYLENS library.
+
+bowcar
+
+The external Python dependency is bowcar==1.3.4, authored by ITPLE.
+Install it from https://pypi.org/project/bowcar/1.3.4/.
+The bowcar package itself is not redistributed in this bundle.
+
+Extension
+
+The newly authored extension, examples, and host tests are covered by LICENSE.
+The manufacturer's source retains its own license as described above.
