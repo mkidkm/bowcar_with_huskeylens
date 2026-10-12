@@ -334,7 +334,7 @@ python -B -m unittest discover -s tests -v
 
 Python 검사 7개와 호스트 검사 메서드 2개가 있습니다. 호스트 검사는 GCC와 G++가 필요하며, 컴파일러가 없으면 해당 메서드는 건너뜁니다. 두 호스트 메서드는 기본 예제 4개와 색·얼굴 시작/실패/복구 6개, 총 10개 사례를 실행합니다. NeoPixel은 시험용 버퍼로 대체하므로 실제 LED 신호·출력을 검증하지 않습니다.
 
-GitHub에 게시한 뒤에는 `.github/workflows/checks.yml`이 `main` 푸시와 Pull Request에서 같은 검사를 실행합니다. GitHub Actions 실행 결과는 게시 후 확인해야 합니다.
+`.github/workflows/checks.yml`이 `main` 푸시와 Pull Request에서 같은 검사를 실행합니다. 2026-10-12 GitHub Actions의 첫 실행이 성공했습니다. [실행 결과](https://github.com/mkidkm/bowcar_with_huskeylens/actions/runs/38236316473)와 [최신 검사 상태](https://github.com/mkidkm/bowcar_with_huskeylens/actions)를 확인할 수 있습니다.
 
 ## 검증 범위와 알려진 한계
 

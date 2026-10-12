@@ -52,7 +52,10 @@
       "tag_actions"
     ],
     "physical_hardware_test": false,
-    "github_actions_execution": false
+    "github_actions_execution": true,
+    "github_actions_conclusion": "success",
+    "github_actions_verified_revision": "477cb67333e3b0e98278d3499fde39611afd1090",
+    "github_actions_run_url": "https://github.com/mkidkm/bowcar_with_huskeylens/actions/runs/38236316473"
   },
   "repository": {
     "owner": "mkidkm",

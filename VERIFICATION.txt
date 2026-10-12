@@ -93,3 +93,14 @@ GitHub 공개 준비 추가 검증 — 2026-10-12
 
   GitHub Actions용 GCC/G++ 호스트 검사 설정을 포함함. 클라우드 실행은 미확인.
   실제 보드 업로드와 카메라/LED/주행 시험은 수행하지 않음.
+
+GitHub 공개 및 클라우드 검증 — 2026-10-12
+
+  공개 저장소: https://github.com/mkidkm/bowcar_with_huskeylens
+  main에 준비한 39개 파일을 게시함. 공개 API에서 파일 목록과 Git blob SHA를
+  로컬 파일 바이트와 비교하여 누락/추가/내용 불일치가 없음을 확인함.
+  GitHub Actions Software checks 첫 실행과 software-tests 작업이 성공함.
+  GCC/G++ 확인, Python 의존성 설치, unittest 실행 단계가 포함됨.
+  검증 리비전: 477cb67333e3b0e98278d3499fde39611afd1090
+  실행 기록: https://github.com/mkidkm/bowcar_with_huskeylens/actions/runs/38236316473
+  실제 보드 업로드와 카메라/LED/주행 시험은 수행하지 않음.
