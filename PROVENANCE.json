@@ -35,11 +35,11 @@
     ]
   },
   "verification": {
-    "python_unittest_methods": 9,
-    "python_passed": 7,
-    "python_host_methods_skipped_on_windows": 2,
-    "host_simulated_cases": 10,
-    "host_validation_compiler": "MSVC with temporary upstream portability shims",
+    "python_unittest_methods": 16,
+    "python_passed": 13,
+    "python_host_methods_skipped_on_windows": 3,
+    "host_simulated_cases": 19,
+    "host_validation_compiler": "MSVC; 10 HUSKYLENS cases used temporary upstream portability shims, 9 standalone cases used unchanged sources",
     "gcc_host_execution_on_this_windows": false,
     "avr_compilation": true,
     "avr_core": "arduino:avr@1.8.8",
@@ -49,7 +49,11 @@
       "face_follow",
       "follow_object",
       "line_follow",
-      "tag_actions"
+      "tag_actions",
+      "basic_drive",
+      "sensor_leds",
+      "obstacle_stop",
+      "power_check"
     ],
     "physical_hardware_test": false,
     "github_actions_execution": true,
@@ -63,7 +67,39 @@
     "visibility": "public",
     "url": "https://github.com/mkidkm/bowcar_with_huskeylens"
   },
-  "updated_date": "2026-10-12",
+  "updated_date": "2026-10-13",
   "default_board": "arduino:avr:uno",
-  "default_port": "automatic_arduino_or_ch340"
+  "default_port": "automatic_arduino_or_ch340",
+  "education_materials": {
+    "date": "2026-10-13",
+    "manual": "docs/INSTRUCTOR_GUIDE.md",
+    "examples": [
+      "basic_drive",
+      "sensor_leds",
+      "obstacle_stop",
+      "power_check"
+    ],
+    "default_action": "generate_only",
+    "sensor_modes": [
+      "button",
+      "light",
+      "sound",
+      "line"
+    ],
+    "power_check_default": "idle",
+    "avr_compiled_configurations": 8,
+    "physical_hardware_validation_of_new_examples": false,
+    "host_simulated_cases": 9,
+    "host_validation_compiler": "MSVC, unmodified standalone host test sources",
+    "ci_status_url": "https://github.com/mkidkm/bowcar_with_huskeylens/actions"
+  },
+  "user_reported_power_observation": {
+    "date": "2026-10-13",
+    "source": "user_report",
+    "battery": "3.7V lithium polymer",
+    "battery_power_on": "reported stable driving",
+    "pc_usb_only": "reported repeated reset, including another board",
+    "measured_reset_cause": false,
+    "board_damage_confirmed": false
+  }
 }

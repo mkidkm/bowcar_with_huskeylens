@@ -104,3 +104,39 @@ GitHub 공개 및 클라우드 검증 — 2026-10-12
   검증 리비전: 477cb67333e3b0e98278d3499fde39611afd1090
   실행 기록: https://github.com/mkidkm/bowcar_with_huskeylens/actions/runs/38236316473
   실제 보드 업로드와 카메라/LED/주행 시험은 수행하지 않음.
+
+강사용 교육 자료 추가 검증 — 2026-10-13
+
+  docs/INSTRUCTOR_GUIDE.md에 설치, 전원, USB 포트, 주행/센서/허스키렌즈
+  실습 순서, 예상 동작, 로그 확인과 수업 준비 절차를 정리함.
+  카메라 없이 사용하는 StandaloneBowCar와 기본 주행/센서 LED/초음파
+  장애물 정지/전원 점검 예제 4개 및 생성된 .ino를 추가함.
+  기본 실행은 파일 생성만 수행하며 컴파일/업로드는 옵션으로 구분함.
+  기본 주행은 각 주행 단계 앞에 300ms 정지하고 모터 극성 옵션을 반영함.
+  장애물 예제는 측정 전에 정지, echo 대기 25ms, 무응답 거리 0에서 정지함.
+  전원 점검은 모터 정지 idle이 기본이고 drive를 명시해야 주행함.
+
+  Python 3.11 unittest: 16개 중 13개 통과, GCC/G++가 없는 Windows에서
+  호스트 메서드 3개 skip. Python 3.8 문법 및 문서 코드 조각/링크 검사 통과.
+  새 호스트 모의 사례 9개는 MSVC로 컴파일 및 실행 통과함.
+  주행 순서/시간/정지 구간/극성 반전, 센서 4모드 조건, echo 무응답/거리
+  경계/측정 전 정지, power_check idle/drive, BOOT와 단계 로그를 확인함.
+  테스트 소스 변경 없이 컴파일 실행 명령만 MSVC로 바꾸었으며
+  기존 10개 HUSKYLENS 모의 사례는 위 2026-10-12 기록을 참조함.
+
+  Arduino AVR Boards 1.8.8 / arduino:avr:uno의 새 8개 구성 컴파일 통과:
+    basic_drive: Flash 3,416 / 정적 SRAM 188바이트.
+    sensor_leds button: Flash 3,360 / 정적 SRAM 208바이트.
+    sensor_leds light: Flash 3,362 / 정적 SRAM 208바이트.
+    sensor_leds sound: Flash 3,362 / 정적 SRAM 208바이트.
+    sensor_leds line: Flash 3,364 / 정적 SRAM 208바이트.
+    obstacle_stop: Flash 3,294 / 정적 SRAM 196바이트.
+    power_check idle: Flash 2,436 / 정적 SRAM 188바이트.
+    power_check drive: Flash 3,416 / 정적 SRAM 188바이트.
+
+  사용자 실물 관찰(PC 검사와 별도): 배터리는 3.7V 리튬폴리머이며
+  배터리 전원을 켜면 항상 정상 동작했다고 확인함. PC USB 단독 연결에서는
+  다른 보드에서도 반복 재시작했다고 보고함. 이 관찰은 기존 기본 주행 및
+  진단 프로그램에 대한 것으로, 새 교육 예제 전체의 실물 검증을 의미하지 않음.
+  실제 전압/전원 경로/재시작 원인이나 보드 손상을 측정으로 확정하지 않음.
+  이번 자료 정리에서는 보드 업로드 및 실제 센서/카메라/주행 시험을 하지 않음.

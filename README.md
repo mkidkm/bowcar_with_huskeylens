@@ -1,6 +1,10 @@
 # 바우카 + 허스키렌즈
 
-바우카에서 **HUSKYLENS 1(SEN0305)**의 인식 결과를 I2C로 읽어 LED, 네오픽셀, 모터를 제어하는 Python 확장입니다. `bowcar.UploadBowCar`를 상속한 `HuskyLensBowCar`로 Arduino 프로그램을 만들고 컴파일·업로드합니다. 업로드한 프로그램은 바우카 MCU의 `setup()`과 `loop()`에서 독립적으로 실행됩니다.
+바우카의 **기본 주행, 센서 활용, HUSKYLENS 1(SEN0305) 연동**을 위한 Python 교육 예제입니다. Python으로 Arduino 프로그램을 만들고 컴파일·업로드하며, 업로드한 프로그램은 바우카 MCU의 `setup()`과 `loop()`에서 독립적으로 실행됩니다. 기본 예제는 `StandaloneBowCar`, 허스키렌즈 I2C 연동은 `HuskyLensBowCar`를 사용합니다.
+
+강사는 [설치·사용 매뉴얼](docs/INSTRUCTOR_GUIDE.md)부터 확인하세요. Python 3.11 환경을 수업 기준으로 사용합니다. 외부 `bowcar` 패키지의 등록 조건은 Python 3.8 이상이지만, 모든 버전과 기능을 검증한 것은 아닙니다.
+
+**주행 전에는 바우카의 지정 배터리 전원을 켜세요.** 사용자 확인 결과, 3.7V 리튬폴리머 배터리 전원을 켜면 정상 주행했고 PC USB 단독 연결에서는 다른 보드도 반복 리셋됐습니다. USB 단독을 주행용 전원으로 전제하지 않습니다. 이 관찰만으로 보드 손상이나 리셋 원인을 확정하지 않았습니다.
 
 공개 저장소는 **[mkidkm/bowcar_with_huskeylens](https://github.com/mkidkm/bowcar_with_huskeylens)**입니다. 다음 명령으로 받을 수 있습니다.
 
@@ -14,10 +18,12 @@ cd bowcar_with_huskeylens
 | 파일·폴더 | 내용 |
 |---|---|
 | [bowcar_huskylens.py](bowcar_huskylens.py) | 허스키렌즈 I2C 연결, 모드 설정, 대상 선택, 코드 생성·업로드 확장 |
+| [bowcar_teaching.py](bowcar_teaching.py) | 카메라 없이 기본 주행·센서 코드 생성, 명시적 컴파일·업로드, 모터 극성 설정 |
+| [docs/INSTRUCTOR_GUIDE.md](docs/INSTRUCTOR_GUIDE.md) | 강사용 설치·전원·실습 순서·예상 동작·문제 해결 매뉴얼 |
 | [upload_settings.py](upload_settings.py) | USB 포트, 보드 설정, 모터 극성 |
 | [upload_color_neopixel.py](upload_color_neopixel.py) | 색 ID별 네오픽셀 색 변경, 모터 정지 유지 |
 | [upload_face_follow.py](upload_face_follow.py) | 학습한 얼굴의 x 좌표에 따른 조향·전진 |
-| [examples/](examples/) | 연결 확인, 물체 추종, 태그 동작, 선 추종 예제 |
+| [examples/](examples/) | 기본 주행, 센서 LED, 장애물 정지, 전원 점검 및 허스키렌즈 예제 |
 | [generated/](generated/) | Python으로 생성한 Arduino `.ino` 스케치 |
 | [tests/](tests/) | Python 코드 생성 검사와 호스트 C/C++ 모의 시험 |
 | [vendor/HUSKYLENS/](vendor/HUSKYLENS/) | Arduino CLI에 전달하는 제조사 원본 라이브러리 |
@@ -62,6 +68,38 @@ RIGHT_POLARITY = 1
 ```powershell
 arduino-cli board list
 ```
+
+## 기본 주행·센서 실습
+
+다음 예제는 **허스키렌즈 없이** 실행합니다. 옵션 없이 실행하면 `.ino` 파일만 생성하며, `--upload`를 지정해야 보드에 올립니다. 실행할 때마다 같은 동작을 반복합니다. 주행은 배터리 전원을 켜고 바퀴를 띄워 방향부터 확인하세요.
+
+| 예제 | 동작 |
+|---|---|
+| [basic_drive.py](examples/basic_drive.py) | 전진 1초 → 후진 1초 → 좌회전 0.5초 → 우회전 0.5초 → 정지 2초. 각 주행 단계 앞에 300ms 정지, 기본 PWM 100 |
+| [sensor_leds.py](examples/sensor_leds.py) | 모터 정지 상태에서 버튼·조도·소리·좌우 라인 값 출력. `--sensor button/light/sound/line`으로 LED 조건 선택 |
+| [obstacle_stop.py](examples/obstacle_stop.py) | 거리 20cm 이내 또는 초음파 무응답이면 정지. 측정 전에 모터를 정지하고 최대 25ms 동안 응답 대기 |
+| [power_check.py](examples/power_check.py) | 기본 `--mode idle`은 모터 정지·파랑 LED 점멸. `--mode drive`를 명시하면 기본 주행으로 리셋 여부 비교 |
+
+```powershell
+# 기본 주행 파일 생성 / 컴파일 / 업로드를 각각 선택
+python examples/basic_drive.py
+python examples/basic_drive.py --compile --fqbn arduino:avr:uno
+python examples/basic_drive.py --upload --fqbn arduino:avr:uno --port COM11
+
+# 센서 종류별 실습: 기본은 button, 아래는 조도
+python examples/sensor_leds.py --sensor light --upload --fqbn arduino:avr:uno --port COM11
+
+# 초음파 센서가 연결된 보드에서 거리 실습
+python examples/obstacle_stop.py --upload --fqbn arduino:avr:uno --port COM11
+
+# 먼저 모터 정지 상태로 전원 점검, 이후 주행 비교
+python examples/power_check.py --upload --fqbn arduino:avr:uno --port COM11
+python examples/power_check.py --mode drive --upload --fqbn arduino:avr:uno --port COM11
+```
+
+`--port`를 생략하면 Arduino/CH340 USB 포트가 하나일 때만 자동 선택합니다. `--reverse-left`, `--reverse-right`로 반대로 도는 모터를 보정합니다. 새 예제도 `upload_settings.py`를 자동으로 읽지 않습니다. `generated/sensor_leds`는 기본 버튼 모드, `generated/power_check`는 모터 정지 모드입니다. 다른 모드를 생성하려면 해당 옵션으로 다시 실행하세요.
+
+시리얼 모니터는 **9600 baud**입니다. 새 예제의 시작 시 `BOOT`와 빨강·파랑 LED 빠른 3회 깜빡임이 표시됩니다. 주행 중 이 시작 표시가 반복되면 재시작 여부를 확인하세요. 센서 임계값 500과 거리 기준 20cm는 수업용 초기값이며 실물에서 보정해야 합니다. 라인 센서의 A6/A7 채널과 배선은 실제 보드에서 확인해야 합니다. 상세 예상 동작과 수업 순서는 [강사용 매뉴얼](docs/INSTRUCTOR_GUIDE.md)에 있습니다.
 
 ## 허스키렌즈 I2C 연결
 
@@ -123,7 +161,7 @@ python upload_face_follow.py
 
 파일 위쪽에서 `CENTER_X`, `DEADBAND`, `BASE_SPEED`, `TURN_SPEED`, `STOP_FACE_WIDTH`를 변경할 수 있습니다. 기본값은 화면 중앙 x=160, 허용 범위 ±25, 속도 90, 조향 속도 차이 40입니다. 빨강·파랑 LED와 시리얼 로그로 상태를 표시합니다.
 
-## 기본 예제 4개
+## 허스키렌즈 기본 예제 4개
 
 `examples/`의 예제는 **옵션 없이 실행하면 `.ino` 생성만 수행**합니다. 색·얼굴 업로드 파일과 실행 방식이 다릅니다.
 
@@ -332,7 +370,7 @@ Python 설정 파일을 바꾸면 다음에 Python으로 생성하는 코드에 
 python -B -m unittest discover -s tests -v
 ```
 
-Python 검사 7개와 호스트 검사 메서드 2개가 있습니다. 호스트 검사는 GCC와 G++가 필요하며, 컴파일러가 없으면 해당 메서드는 건너뜁니다. 두 호스트 메서드는 기본 예제 4개와 색·얼굴 시작/실패/복구 6개, 총 10개 사례를 실행합니다. NeoPixel은 시험용 버퍼로 대체하므로 실제 LED 신호·출력을 검증하지 않습니다.
+Python 코드 생성·컴파일/업로드 옵션 검사와 생성된 C/C++의 호스트 모의 검사가 있습니다. 호스트 검사는 GCC/G++가 필요하며, 컴파일러가 없으면 해당 메서드는 건너뜁니다. 기존 허스키렌즈 예제·색/얼굴 시작/실패/복구 사례와 교육 예제의 주행 순서·정지 구간·센서 조건·전원 점검 모드를 검사합니다. NeoPixel과 센서는 시험용 장치로 대체하므로 실제 LED 신호·센서값·전원 안정성을 검증하지 않습니다.
 
 `.github/workflows/checks.yml`이 `main` 푸시와 Pull Request에서 같은 검사를 실행합니다. 2026-10-12 GitHub Actions의 첫 실행이 성공했습니다. [실행 결과](https://github.com/mkidkm/bowcar_with_huskeylens/actions/runs/38236316473)와 [최신 검사 상태](https://github.com/mkidkm/bowcar_with_huskeylens/actions)를 확인할 수 있습니다.
 
