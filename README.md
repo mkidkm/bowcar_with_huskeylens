@@ -2,7 +2,7 @@
 
 바우카의 **기본 주행, 센서 활용, HUSKYLENS 1(SEN0305) 연동**을 위한 Python 교육 예제입니다. Python으로 Arduino 프로그램을 만들고 컴파일·업로드하며, 업로드한 프로그램은 바우카 MCU의 `setup()`과 `loop()`에서 독립적으로 실행됩니다. 기본 예제는 `StandaloneBowCar`, 허스키렌즈 I2C 연동은 `HuskyLensBowCar`를 사용합니다.
 
-강사는 [설치·사용 매뉴얼](docs/INSTRUCTOR_GUIDE.md)부터 확인하세요. Python 3.11 환경을 수업 기준으로 사용합니다. 외부 `bowcar` 패키지의 등록 조건은 Python 3.8 이상이지만, 모든 버전과 기능을 검증한 것은 아닙니다.
+강사는 [설치·사용 매뉴얼](docs/INSTRUCTOR_GUIDE.md)부터 확인하세요. 전달·인쇄용 [PDF 매뉴얼](docs/INSTRUCTOR_GUIDE.pdf)은 목차·책갈피와 허스키렌즈 함수/인식 모드 부록을 포함한 14쪽 자료입니다. Python 3.11 환경을 수업 기준으로 사용합니다. 외부 `bowcar` 패키지의 등록 조건은 Python 3.8 이상이지만, 모든 버전과 기능을 검증한 것은 아닙니다.
 
 **주행 전에는 바우카의 지정 배터리 전원을 켜세요.** 사용자 확인 결과, 3.7V 리튬폴리머 배터리 전원을 켜면 정상 주행했고 PC USB 단독 연결에서는 다른 보드도 반복 리셋됐습니다. USB 단독을 주행용 전원으로 전제하지 않습니다. 이 관찰만으로 보드 손상이나 리셋 원인을 확정하지 않았습니다.
 
@@ -20,6 +20,7 @@ cd bowcar_with_huskeylens
 | [bowcar_huskylens.py](bowcar_huskylens.py) | 허스키렌즈 I2C 연결, 모드 설정, 대상 선택, 코드 생성·업로드 확장 |
 | [bowcar_teaching.py](bowcar_teaching.py) | 카메라 없이 기본 주행·센서 코드 생성, 명시적 컴파일·업로드, 모터 극성 설정 |
 | [docs/INSTRUCTOR_GUIDE.md](docs/INSTRUCTOR_GUIDE.md) | 강사용 설치·전원·실습 순서·예상 동작·문제 해결 매뉴얼 |
+| [docs/INSTRUCTOR_GUIDE.pdf](docs/INSTRUCTOR_GUIDE.pdf) | 강사 전달·인쇄용 PDF, 한글 글꼴·목차·책갈피·함수/모드 부록 포함 |
 | [upload_settings.py](upload_settings.py) | USB 포트, 보드 설정, 모터 극성 |
 | [upload_color_neopixel.py](upload_color_neopixel.py) | 색 ID별 네오픽셀 색 변경, 모터 정지 유지 |
 | [upload_face_follow.py](upload_face_follow.py) | 학습한 얼굴의 x 좌표에 따른 조향·전진 |

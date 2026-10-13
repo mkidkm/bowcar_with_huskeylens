@@ -6,4 +6,5 @@
 *.yml text eol=lf
 *.ino text eol=lf
 *.zip binary
+*.pdf binary
 vendor/HUSKYLENS/* -text
